@@ -1,0 +1,59 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "F1 Report API",
+    "version": "1.0",
+    "description": "API for retrieving F1 race report in JSON and XML formats."
+  },
+  "paths": {
+    "/api/v1/report/": {
+      "get": {
+        "tags": ["reports"],
+        "summary": "Get best laps and invalid laps report",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Output format (json/xml)",
+            "required": false,
+            "type": "string",
+            "enum": ["json", "xml"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Report data in the specified format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "best_laps": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "invalid_laps": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid format or other error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
